@@ -9,4 +9,22 @@ module.exports = {
   core: {
     builder: "webpack5",
   },
+  webpackFinal: async (config) => {
+    config.module.rules.push({
+      test: /\.css$/,
+      use: [
+        // Loader for webpack to process CSS with PostCSS
+        {
+          loader: "postcss-loader",
+          options: {
+            sourceMap: true,
+            postcssOptions: {
+              path: "./.storybook/",
+            },
+          },
+        },
+      ],
+    });
+    return config;
+  },
 };
