@@ -64,6 +64,14 @@ to test the integrated component.
 
 An end to end test is implement with [Cypress].
 
+# Commands
+
+- Start the app: `npm start`
+- Tests (Jest test runner): `npm test`
+- Storybook: `npm run storybook`
+- Chromatic: `npm run chromatic`
+- End to end tests (Cypress): `npx cypress open`
+
 # License
 
 frontend-testing is open source software licensed as MIT.
