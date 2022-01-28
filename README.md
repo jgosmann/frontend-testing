@@ -29,7 +29,7 @@ of being independent of the concrete implemantation.
 For example,
 it does not matter
 whether elements in the collapsed state are hidden
-with `display: none` or `height: 0`.
+with `height: 0` or `max-height: 0`.
 
 You can view
 [the repository's Chromatic page](https://chromatic.com/library?appId=61f3c3b7fdae5e003ab73c69&branch=main)

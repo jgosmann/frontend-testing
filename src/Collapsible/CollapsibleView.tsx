@@ -33,7 +33,11 @@ const CollapsibleView = ({
     </h2>
     <div
       className="box-border overflow-hidden"
-      style={{ display: isExpanded ? "block" : "none" }}
+      style={
+        isExpanded
+          ? { visibility: "visible", height: "auto" }
+          : { visibility: "hidden", height: 0 }
+      }
     >
       <div className="pt-2">{children}</div>
     </div>
