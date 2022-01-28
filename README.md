@@ -60,6 +60,10 @@ However,
 one could use [Storybook interactions]
 to test the integrated component.
 
+## End to end
+
+An end to end test is implement with [Cypress].
+
 # License
 
 frontend-testing is open source software licensed as MIT.
@@ -68,6 +72,7 @@ The React logo (Meta Platforms, Inc.) is licensed under a Creative Commons Attri
 
 [chromatic]: https://www.chromatic.com/
 [create-react-app]: https://create-react-app.dev/
+[cypress]: https://www.cypress.io/
 [jest]: https://jestjs.io/
 [storybook]: https://storybook.js.org/
 [storybook interactions]: https://storybook.js.org/docs/react/essentials/interactions
