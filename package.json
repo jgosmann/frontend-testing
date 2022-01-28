@@ -1,5 +1,6 @@
 {
   "name": "frontend-testing",
+  "homepage": "https://jgosmann.github.io/frontend-testing/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
