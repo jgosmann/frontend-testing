@@ -1,46 +1,74 @@
-# Getting Started with Create React App
+# Front end testing example
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repository demonstrates how different parts of a React app can be tested.
+It is based on [create-react-app],
+and implements a `Collapsible` box component.
+To ease testing the pure view and logic parts are split
+into a `CollapsibleView` and `CollapsibleController` component respectively.
 
-## Available Scripts
+## Logic testing
 
-In the project directory, you can run:
+The logic part is tested using "classical" unit testing
+with the [Jest] test runner.
 
-### `npm start`
+## View component testing
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The `CollapsibleView` component has a button that should invoke a callback.
+This also uses a unit test with a mock.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+However,
+to test the visual appearance,
+[Storybook] and [Chromatic] are used.
+For each relevant display state,
+a story is defined in the Storybook.
+Chromatic will screenshot the rendering of each story,
+and does a visual regression test on them.
+Any change needs to be accepted via the web UI.
+Testing the visual appearance has the advantage
+of being independent of the concrete implemantation.
+For example,
+it does not matter
+whether elements in the collapsed state are hidden
+with `display: none` or `height: 0`.
 
-### `npm test`
+You can view
+[the repository's Chromatic page](https://chromatic.com/library?appId=61f3c3b7fdae5e003ab73c69&branch=main)
+and [the repository's Storybook](https://main--61f3c3b7fdae5e003ab73c69.chromatic.com/).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Not everything shows in the screenshot, though.
+For example,
+title texts are not covered this way.
+Testing them with a unit test is cumbersome
+because each change requires an equivalent change in the unit test.
+The [Storyshots] addon for storybook gives snapshot tests for the Storybook stories
+without additional work.
+This allows to detect unwanted changes in the markup,
+but also makes it quick to accept changes.
 
-### `npm run build`
+## Integration
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The integration of the controller and view is tested with Jest.
+It is similar to the `CollabsibleController` test.
+For simple components like `Collapsible` it might suffice
+to have just one of these tests.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Another Storybook story is provided for the integration
+of the `CollapsibleView` and `CollapsibleController`.
+As visual testing is done already for the view `CollapsibleView`,
+Chromatic has been disabled in this test.
+However,
+one could use [Storybook interactions]
+to test the integrated component.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# License
 
-### `npm run eject`
+frontend-testing is open source software licensed as MIT.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The React logo (Meta Platforms, Inc.) is licensed under a Creative Commons Attribution 4.0 International license.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+[chromatic]: https://www.chromatic.com/
+[create-react-app]: https://create-react-app.dev/
+[jest]: https://jestjs.io/
+[storybook]: https://storybook.js.org/
+[storybook interactions]: https://storybook.js.org/docs/react/essentials/interactions
+[storyshots]: https://www.npmjs.com/package/@storybook/addon-storyshots

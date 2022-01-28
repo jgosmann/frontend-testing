@@ -41,7 +41,7 @@ exports[`Storyshots Collapsible/Integration Integration 1`] = `
     className="box-border overflow-hidden"
     style={
       Object {
-        "maxHeight": 0,
+        "display": "none",
       }
     }
   >
@@ -96,7 +96,7 @@ exports[`Storyshots Collapsible/View Component Collapsed 1`] = `
     className="box-border overflow-hidden"
     style={
       Object {
-        "maxHeight": 0,
+        "display": "none",
       }
     }
   >
@@ -151,7 +151,7 @@ exports[`Storyshots Collapsible/View Component Expanded 1`] = `
     className="box-border overflow-hidden"
     style={
       Object {
-        "maxHeight": "none",
+        "display": "block",
       }
     }
   >
