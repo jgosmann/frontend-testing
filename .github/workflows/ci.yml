@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        check:
+          - name: Type check
+            run: npx tsc --noEmit
+          - name: Lint
+            run: npx eslint src
+          - name: Build
+            run: npm run build
+          - name: Test
+            run: npm test
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "17.x"
+          cache: "npm"
+      - run: npm ci
+
+      - name: ${{ matrix.check.name }}
+        run: ${{ matrix.check.run }}
+
+  Chromatic:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "17.x"
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Publish to Chromatic for visual verification
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
